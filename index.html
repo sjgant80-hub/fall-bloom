@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>fall-bloom · ◊ text → 7-ring vector</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#06070b; --surface:#0c0e14; --s2:#11141d; --border:#1f2330;
+  --ink:#b8bfca; --dim:#6b7280; --bright:#f0f3f7;
+  --gold:#d4a853; --ok:#4ecba0;
+  --r0:#660044; --r1:#00AAFF; --r2:#FFAA00; --r3:#FF4444;
+  --r4:#44AA44; --r5:#AA44FF; --r6:#FFFFFF;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Syne',system-ui,sans-serif; background:var(--bg); color:var(--ink); min-height:100vh; line-height:1.55; }
+code, pre, .mono { font-family:'DM Mono',ui-monospace,monospace; }
+header { padding:60px 24px 40px; text-align:center; border-bottom:1px solid var(--border); background:linear-gradient(180deg,rgba(78,203,160,0.04),transparent); }
+header .glyph { font-size:32px; color:var(--ok); display:block; margin-bottom:12px; }
+header h1 { font-size:38px; font-weight:800; color:var(--bright); letter-spacing:-0.02em; margin-bottom:10px; }
+header p { color:var(--dim); font-size:14px; font-family:'DM Mono',monospace; letter-spacing:.05em; }
+main { max-width:880px; margin:0 auto; padding:40px 24px 80px; }
+section { margin-bottom:36px; }
+section h2 { font-size:11px; color:var(--dim); letter-spacing:.12em; text-transform:uppercase; font-family:'DM Mono',monospace; margin-bottom:14px; font-weight:700; }
+pre { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:16px 18px; overflow-x:auto; font-size:12px; color:var(--ink); margin-bottom:12px; }
+code.inline { background:var(--s2); padding:1px 5px; border-radius:3px; font-size:.92em; color:var(--ok); }
+
+.demo { background:var(--surface); border:1px solid var(--ok); border-radius:10px; padding:20px; }
+.demo input { width:100%; background:var(--s2); color:var(--bright); border:1px solid var(--border); border-radius:6px; padding:10px 12px; font-size:14px; font-family:inherit; margin-bottom:12px; }
+.bar-row { display:grid; grid-template-columns:80px 1fr 40px; gap:10px; align-items:center; padding:4px 0; font-family:'DM Mono',monospace; font-size:11px; }
+.bar-row .lbl { font-size:11px; }
+.bar-track { background:var(--s2); border-radius:4px; height:10px; overflow:hidden; border:1px solid var(--border); }
+.bar-fill { height:100%; transition:width .3s; }
+.bar-row .val { text-align:right; color:var(--bright); }
+.meta { margin-top:12px; padding-top:12px; border-top:1px solid var(--border); font-family:'DM Mono',monospace; font-size:11px; color:var(--ok); word-break:break-all; }
+
+footer { padding:24px; text-align:center; color:var(--dim); font-size:11px; font-family:'DM Mono',monospace; border-top:1px solid var(--border); letter-spacing:.06em; }
+footer a { color:var(--ok); text-decoration:none; }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="glyph">◊</span>
+  <h1>fall-bloom</h1>
+  <p>text → 7-ring vector · spine primes 2 3 5 7 11 13 17 · drop-in plugin</p>
+</header>
+
+<main>
+
+  <section>
+    <h2>Live decomposition</h2>
+    <div class="demo">
+      <input id="txt" type="text" placeholder="type any text · watch the bloom" value="why does the witness sleep at the gate of the field">
+      <div id="bars"></div>
+      <div class="meta" id="meta"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Install</h2>
+    <pre>&lt;script src="https://sjgant80-hub.github.io/fall-bloom/bloom.js" defer&gt;&lt;/script&gt;</pre>
+  </section>
+
+  <section>
+    <h2>API</h2>
+    <pre>window.bloom.decompose(text)    <span style="color:var(--dim)">// → { bloom, product, normalized, dominantRing, dominantLabel }</span>
+window.bloom.isBalanced(b)
+window.bloom.isSpiked(b)
+window.bloom.dominantRing(b)
+window.bloom.needsSearch(b, t)
+window.bloom.signature(text)    <span style="color:var(--dim)">// → "R0:c|R1:c|...|R6:c · Π=N"</span>
+window.bloom.pickMCP(norm, t)   <span style="color:var(--dim)">// → MCP servers to invoke</span></pre>
+  </section>
+
+  <section>
+    <h2>Seven rings</h2>
+    <pre>R0  ground     prime 2    help · deploy · walker · torus · gpu
+R1  sensor     prime 3    find · search · observe · pulse · heartbeat
+R2  gate       prime 5    filter · approve · validate · consensus · vote
+R3  affect     prime 7    feel · urgent · love · heart · resonance
+R4  executive  prime 11   plan · execute · swarm · dispatch · build
+R5  identity   prime 13   who · bloom · signature · kappa · mission
+R6  observer   prime 17   why · reflect · oracle · witness · recursion</pre>
+  </section>
+
+</main>
+
+<footer>
+  ◊·κ=1 · fall-bloom v1.0 · MIT · ported from teslasolar/MissCassandra w/ attribution ·
+  <a href="https://github.com/sjgant80-hub/fall-bloom">source</a>
+</footer>
+
+<script src="./bloom.js" defer></script>
+<script>
+  const COLORS = ['#660044','#00AAFF','#FFAA00','#FF4444','#44AA44','#AA44FF','#FFFFFF'];
+  const LABELS = ['R0 ground','R1 sensor','R2 gate','R3 affect','R4 exec','R5 identity','R6 observer'];
+  function paint() {
+    if (!window.bloom) { setTimeout(paint, 100); return; }
+    const t = document.getElementById('txt').value;
+    const r = window.bloom.decompose(t);
+    const max = Math.max(...r.bloom, 1);
+    document.getElementById('bars').innerHTML = r.bloom.map((c, i) =>
+      '<div class="bar-row">' +
+        '<span class="lbl" style="color:' + COLORS[i] + '">' + LABELS[i] + '</span>' +
+        '<div class="bar-track"><div class="bar-fill" style="width:' + (c/max*100).toFixed(1) + '%;background:' + COLORS[i] + '"></div></div>' +
+        '<span class="val">' + c + '</span>' +
+      '</div>'
+    ).join('');
+    document.getElementById('meta').innerHTML =
+      'dominant: <strong>' + r.dominantLabel + '</strong> · Π = ' + r.product.toString() +
+      (r.product > 1000000000n ? '' : '') +
+      '<br>signature: ' + window.bloom.signature(t).split(' · ')[0];
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('txt').addEventListener('input', paint);
+    paint();
+  });
+</script>
+
+</body>
+</html>
